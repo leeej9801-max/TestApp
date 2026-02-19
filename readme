@@ -1,0 +1,23 @@
+
+pipeline {
+	agent any
+	environment {
+		GITHUB_REPO = "https://github.com/leeej9801-max/TestApp.git"
+	}
+	stages {
+		stage('Checkout') {
+			steps {
+				echo "Checking out code from GitHub..."
+				git branch: 'main', url: "${GITHUB_REPO}"
+			}
+		}
+	}
+	post {
+		success {
+			echo 'Checkout completed successfully!'
+		}
+		failure {
+			echo 'Checkout failed.'
+		}
+	}
+}
